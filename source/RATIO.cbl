@@ -66,7 +66,7 @@
            .
 
       *****************************************************************
-      * 
+      * Open and read the sorted file, at End-of-File, read the next
       *****************************************************************
        1000-Read-Sorted.
            perform 1100-Open
@@ -77,7 +77,7 @@
            .
 
       *****************************************************************
-      * 
+      * Open Sorted-File unless status is not OK
       *****************************************************************
        1100-Open.
            open input Sorted-File
@@ -88,7 +88,9 @@
            .
 
       *****************************************************************
-      * 
+      * Move information from Sorted-File into Sorted-Record.
+      * Continues until E-o-F as long as status is OK
+      * After E-o-F, move on to 3000 and 4000
       *****************************************************************
        1200-Read-Next.
            read Sorted-File next into Sorted-Record end-read
@@ -104,7 +106,7 @@
            .
 
       *****************************************************************
-      * 
+      * Holds all the steps needed to rationalize customer names
       *****************************************************************
        3000-Rationalize-Names.
            move zero to Tally-Field
@@ -119,7 +121,7 @@
            .
 
       *****************************************************************
-      * 
+      * Checks for Do Not Call (DNC) status
       *****************************************************************
        3100-Check-DNC.
            if not (C-DNC of Sorted-Record = ' ' or
@@ -130,7 +132,8 @@
            .
 
       *****************************************************************
-      * 
+      * Determines language and assigns code based on name spacing
+      * EN is assigned with 2 spaces or fewer, ES for 3 or more spaces
       *****************************************************************
        3200-Check-Language-Code.
            if C-Language-Code of Sorted-Record = ' '

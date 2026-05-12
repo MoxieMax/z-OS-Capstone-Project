@@ -93,6 +93,9 @@
            goback
            .
 
+      *****************************************************************
+      * Runs through 1100 and 1200, at EOF moves to next
+      *****************************************************************
        1000-Read-Feed1.
            perform 1100-Open
            perform 1200-Read-Next
@@ -101,6 +104,9 @@
            end-perform
            .
 
+      *****************************************************************
+      * Open the Feed1-File, else display error
+      *****************************************************************
        1100-Open.
            open input Feed1-File
            if not OK of Feed1-File-Status
@@ -109,6 +115,9 @@
            end-if
            .
 
+      *****************************************************************
+      * Read the Feed1-file, if readable proceed to 1300 and 4000
+      *****************************************************************
        1200-Read-Next.
            read Feed1-File next into Feed1-Record end-read
            if not EOF of Feed1-File-Status
@@ -122,6 +131,10 @@
            end-if
            .
 
+      *****************************************************************
+      * Reformat the data for uniformity, validity, "do not contact",
+      * EN/ES language detection
+      *****************************************************************
        1300-Reformat.
            move zero to Tally-Field
            move spaces to Common-record
@@ -153,6 +166,9 @@
            display Common-Record
            .
 
+      *****************************************************************
+      * Ensure email is valid by checking for @ and . after @
+      *****************************************************************
        1310-Validate-Email.
            move zero to Tally-Field
            inspect F1-Email-Address
@@ -163,6 +179,9 @@
                move 'E' to Error-Flag
            .
 
+      *****************************************************************
+      * 1000 again, but for Feed2
+      *****************************************************************
        2000-Read-Feed2.
            perform 2100-Open
            perform 2200-Read-Next
@@ -171,6 +190,9 @@
            end-perform
            .
 
+      *****************************************************************
+      * 1100 again, but for Feed2
+      *****************************************************************
        2100-Open.
            open input Feed2-File
            if not OK of Feed2-File-Status
@@ -179,6 +201,9 @@
            end-if
            .
 
+      *****************************************************************
+      * 1200 again, but for Feed2
+      *****************************************************************
        2200-Read-Next.
            read Feed2-File next into Feed2-Record end-read
            if not EOF of Feed2-File-Status
@@ -192,6 +217,9 @@
            end-if
            .
 
+      *****************************************************************
+      * 
+      *****************************************************************
        2300-Reformat.
            move spaces to Common-record
            perform 2310-Validate-Email
@@ -220,7 +248,9 @@
            end-if
            display Common-record
            .
-
+      *****************************************************************
+      * 1310 again, but for Feed2
+      *****************************************************************
        2310-Validate-Email.
            move zero to Tally-Field
            inspect F2-Email-Address
@@ -231,6 +261,9 @@
                move 'E' to Error-Flag
            .
 
+      *****************************************************************
+      * 1000 again, but for Feed3
+      *****************************************************************
        3000-Read-Feed3.
            perform 3100-Open
            perform 3200-Read-Next
@@ -239,6 +272,9 @@
            end-perform
            .
 
+      *****************************************************************
+      * 1100 again, but for Feed3
+      *****************************************************************
        3100-Open.
            open input Feed3-File
            if not OK of Feed3-File-Status
@@ -247,6 +283,9 @@
            end-if
            .
 
+      *****************************************************************
+      * 1200 again, but for Feed3
+      *****************************************************************
        3200-Read-Next.
            read Feed3-File next into Feed3-Record end-read
            if not EOF of Feed3-File-Status
@@ -260,6 +299,9 @@
            end-if
            .
 
+      *****************************************************************
+      * 
+      *****************************************************************
        3300-Reformat.
            move spaces to Common-record
            if F3-Middle-Name = "STOP"
@@ -300,6 +342,9 @@
            display Common-record
            .
 
+      *****************************************************************
+      * 
+      *****************************************************************
        3310-Validate-Email.
            move zero to Tally-Field
            inspect F3-Email-Address
@@ -319,6 +364,11 @@
            end-if
            .
 
+      *****************************************************************
+      * File won't open: open and append errors to end of Record-Error
+      * File won't open: open and append file status to Common-File
+      * Otherwise add space to Error-Flag to indicate no error
+      *****************************************************************
        4000-Write.
            if Record-Error
                open extend Error-File

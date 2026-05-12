@@ -132,7 +132,7 @@
            .
 
       *****************************************************************
-      * Reformat the data for uniformity, validity, "do not contact",
+      * Reformat the data for uniformity, validity, DNC Status,
       * EN/ES language detection
       *****************************************************************
        1300-Reformat.
@@ -218,7 +218,8 @@
            .
 
       *****************************************************************
-      * 
+      * Reformat the data for uniformity, validity, DNC Status,
+      * EN/ES Language detection
       *****************************************************************
        2300-Reformat.
            move spaces to Common-record
@@ -300,8 +301,9 @@
            .
 
       *****************************************************************
-      * 
-      *****************************************************************
+      * Reformat the data for uniformity, validity, DNC Status,
+      * EN/ES Language detection
+      *****************************************************************
        3300-Reformat.
            move spaces to Common-record
            if F3-Middle-Name = "STOP"

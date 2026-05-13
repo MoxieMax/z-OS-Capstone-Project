@@ -150,7 +150,7 @@
            .
 
       *****************************************************************
-      * 
+      * Flag if name has too few spaces or too many characters
       *****************************************************************
        3300-Check-Name.
            if Tally-Field > 3
@@ -194,14 +194,15 @@
            .
 
       *****************************************************************
-      * 
+      * Placeholder for potential email rationalization
       *****************************************************************
        3400-Check-Email-Address.
            continue
            .
 
       *****************************************************************
-      * 
+      * Open Error-File and append any errors to it
+      * Move rationalized data from Clean-Record to FC-Clean-Record
       *****************************************************************
        4000-Write.
            if Record-Error
